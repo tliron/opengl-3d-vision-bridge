@@ -2,7 +2,7 @@ OpenGL / 3D Vision Bridge
 =========================
 
 This tiny yet sophisticated library allows you to write graphical applications using OpenGL that can make
-use of the consumer version of NVIDIA 3D Vision technology, which normally requires the Microsoft-only
+use of the consumer version of [NVIDIA 3D Vision](http://www.nvidia.com/object/3d-vision-main.html) technology, which normally requires the Microsoft-only
 Direct3D API.
 
 It relies on a native NVIDIA bridging feature, and thus performance is equal to that of using Direct3D
@@ -107,14 +107,28 @@ An example build script is included, named "build.sh".
 Obviously, you will have to run "wow.exe" on Windows with an NVIDIA GPU that supports 3D Vision. You also need to
 make sure that SDL2.dll is are in the same directory as wow.exe.
 
+The demo is intentionally simple: it will show a simple red rectangle on a white background. Press "N" to toggle
+3D Vision. When enabled, the rectangle will appear to "pop out" of the screen if you're wearing the 3D Vision
+glasses.
+
 How to use this library
 -----------------------
 
 There are only a few APIs, and they are very easy to use:
 
+Use GLD3DBuffers_create to enable the library and GLD3DBuffers_destroy to disable it.
+
+GLD3DBuffers_activate_left and GLD3DBuffers_activate_right each active the FBO (Frame Buffer Object) for
+each eye. While activated, all OpenGL output will be sent to that FBO. (Unless, of course, you're using
+FBOs for other purposes: in which case only your final rendering will be sent to the eye's FBO.)
+
+Finally, to render both eyes in stereo call GLD3DBuffers_deactivate and GLD3DBuffers_flush.  
+
 Important: The library's flush API *replaces* your OpenGL swapping mechanism, so make sure *not* to invoke
 swapping. If you're using SDL, this means *not* calling SDL_GL_SwapWindow. Note that vsync, too, is handled
 by the library.
+
+See demo.c for a complete example.
 
 Now, you must also take into account that Direct3D's Y-axis is reversed to that of OpenGL. This means that
 *all* your drawing routines have to support "flipping" the Y-axis when 3D Vision is enabled. I can't teach you
