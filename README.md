@@ -85,27 +85,28 @@ Building the library and demo
 
 To build the library, you will need:
 
-* A C compiler: Tested using gcc, specifically the MinGW cross-compiler version (not tested with Visual C, but
+* C compiler: Tested using gcc, specifically the MinGW cross-compiling version (not tested with Visual C, but
 should work).
 * [NVAPI](https://developer.nvidia.com/nvapi): Tested with version R331.
 * [Microsoft DirectX SDK](http://www.microsoft.com/en-us/download/details.aspx?id=6812): Tested with the June
 2010 version. Note that you will need to unpack the enormous SDK in Windows. You definitely don't need the whole
-SDK: you only need the Direct3D headers files and .lib files.
+SDK: you only need the Direct3D headers and .lib files.
 * OpenGL bindings: I'm including cross-platform bindings I've created using the excellent [glLoadGen tool](https://bitbucket.org/alfonse/glloadgen/wiki/Home).
 However, bindings are highly customizable and specific to your usage. You can build your own using glLoadGen
 or modify the code to use whatever binding tool you prefer (e.g., [GLEW](http://glew.sourceforge.net/)).
 
 To build the demo, you will also need:
 
-* SDL 2
+* [SDL 2](http://www.libsdl.org/)
 
-Note: The DirectX SDK headers are not supported on recent versions of gcc's C compiler, but work fine when using
-its C++ compiler. Despite using the C++ compiler, our code is written in C and the resulting library has a C ABI.
+Note: The DirectX SDK headers won't compile anymore on recent versions of gcc's C compiler, but work fine when
+using its C++ compiler. Despite using the C++ compiler, our code is written in C and the resulting library will
+have a standard C ABI.
 
 An example build script is included, named "build.sh".
 
 Obviously, you will have to run "wow.exe" on Windows with an NVIDIA GPU that supports 3D Vision. You also need to
-make sure that SDL2.dll is are in the same directory as wow.exe.
+make sure that SDL2.dll is in the same directory as wow.exe.
 
 The demo is intentionally simple: it will show a simple red rectangle on a white background. Press "N" to toggle
 3D Vision. When enabled, the rectangle will appear to "pop out" of the screen if you're wearing the 3D Vision
@@ -116,16 +117,16 @@ How to use this library
 
 There are only a few APIs, and they are very easy to use:
 
-Use GLD3DBuffers_create to enable the library and GLD3DBuffers_destroy to disable it.
+Use `GLD3DBuffers_create` to enable the library and `GLD3DBuffers_destroy` to disable it.
 
-GLD3DBuffers_activate_left and GLD3DBuffers_activate_right each active the FBO (Frame Buffer Object) for
+`GLD3DBuffers_activate_left` and `GLD3DBuffers_activate_right` each active the FBO (Frame Buffer Object) for
 each eye. While activated, all OpenGL output will be sent to that FBO. (Unless, of course, you're using
 FBOs for other purposes: in which case only your final rendering will be sent to the eye's FBO.)
 
-Finally, to render both eyes in stereo call GLD3DBuffers_deactivate and GLD3DBuffers_flush.  
+Finally, to render both eyes in stereo call `GLD3DBuffers_deactivate` and `GLD3DBuffers_flush`.  
 
 Important: The library's flush API *replaces* your OpenGL swapping mechanism, so make sure *not* to invoke
-swapping. If you're using SDL, this means *not* calling SDL_GL_SwapWindow. Note that vsync, too, is handled
+swapping. If you're using SDL, this means *not* calling `SDL_GL_SwapWindow`. Note that vsync, too, is handled
 by the library.
 
 See demo.c for a complete example.
