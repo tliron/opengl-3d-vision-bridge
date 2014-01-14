@@ -72,11 +72,11 @@ for this feature. Note that an annoyance of this interop is that OpenGL and Dire
 coordinate systems. This means that you will have to draw "upside down" in OpenGL in order for the rendered image
 to appear correctly. 
 
-"Magic" 3D Vision surfaces: You can turn on 3D Vision by [inserting a magic code](http://developer.download.nvidia.com/presentations/2009/GDC/GDC09-3DVision-The_In_and_Out.pdf)
-into a Direct3D surface.  Unfortunately this is supported only certain .exe filenames, the list of which is
-hardcoded into the driver! (This was likely done in order for NVIDIA to be able to control the list of
+Magic 3D Vision surfaces: You can turn on 3D Vision by [inserting a magic code](http://developer.download.nvidia.com/presentations/2009/GDC/GDC09-3DVision-The_In_and_Out.pdf)
+into a Direct3D surface.  Unfortunately this is supported only for certain .exe filenames, the list of which is
+hardcoded into the driver. (This was likely done in order for NVIDIA to be able to control the list of
 applications that can make use of this feature.) And so, a bizarre and annoying requirement for using this
-library is that your .exe have one of those names. I suggest "wow.exe". I wonder what WoW stands for? ;)
+library is that your .exe has to have one of those names. I suggest "wow.exe". I wonder what WoW stands for? ;)
 
 You can read full details about my long journey to get this working in [my post on MTBS](http://www.mtbs3d.com/phpbb/viewtopic.php?f=105&t=16310&p=97553).
 
