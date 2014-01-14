@@ -17,8 +17,8 @@ OpenGL is a great choice for cross-platform applications, as it's supported on L
 and many mobile and console platforms. However, without this library, you would need to write your graphics
 code in Direct3D in order to make use of 3D Vision. Writing the same application in both OpenGL and Direct3D
 is a prohibitively enormous task for most developers, and so they're left with the difficult choice between
-3D Vision + Microsoft-only vs. OpenGL + cross-platform. With this library you can have your cake and eat
-it!
+3D Vision + Microsoft-only vs. OpenGL + cross-platform but no 3D Vision. With this library you can have your
+cake and eat it!
 
 What this library does *not* do
 -------------------------------
@@ -27,9 +27,10 @@ What this library does *not* do
 
 This library relies on you, the *developer*, to render separate images for the left and right eyes. It is not
 a magical wrapper that allows existing OpenGL games to use 3D Vision. That nice automatic support for 3D Vision
-that Direct3D games enjoy relies on heuristics baked into NVIDIA's Direct3D support. (Indeed, these heuristics
+that Direct3D games enjoy relies on heuristics baked into NVIDIA's driver. (Indeed, these heuristics
 are imperfect and many games do not run well with 3D Vision if they were not designed and tested for using it.)
-These heuristics are not supported for OpenGL.
+These heuristics are not supported in OpenGL. Indeed, the usual 3D Vision configuration in the NVIDIA
+Control Panel will not have any affect on this library, neither will the depth/convergence hot keys work.
 
 *Not* OpenGL quad buffers:
 
@@ -43,10 +44,9 @@ License and "cost"
 ------------------
 
 There's not a lot of code here, but it's *extremely* delicate, and I worked very hard on getting it working.
-I've decided to provide it to you with these instructions free of charge (and without warranty), with a
-permissive MIT-style distribution license, because I love stereoscopy and want it used as widely as possible.
-All I ask in return (but do not require) is that you credit me somewhere in your final product, at the very
-least with something like this:
+I've decided to provide it to you free of charge (and without warranty), with a permissive MIT-style distribution
+license, because I love stereoscopy and want it used as widely as possible. All I ask in return (but do not require)
+is that you credit me somewhere in your final product, at the very least with something like this:
 
 "This product makes use of code written by Tal Liron."
 
