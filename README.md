@@ -72,9 +72,10 @@ for this feature. Note that an annoyance of this interop is that OpenGL and Dire
 coordinate systems. This means that you will have to draw "upside down" in OpenGL in order for the rendered image
 to appear correctly. 
 
-Magic 3D Vision surfaces: You can turn on 3D Vision by [inserting a magic code](http://developer.download.nvidia.com/presentations/2009/GDC/GDC09-3DVision-The_In_and_Out.pdf)
-into a Direct3D surface.  Unfortunately this is supported only for certain .exe filenames, the list of which is
-hardcoded into the driver. (This was likely done in order for NVIDIA to be able to control the list of
+Magic 3D Vision surfaces: You can turn on 3D Vision by [inserting a magic code](http://developer.download.nvidia.com/presentations/2009/GDC/GDC09-3DVision-The_In_and_Out.pdf) (page 37)
+into a Direct3D surface. This will work for any *fullscreen* application. However, support for 3D Vision in *windows*
+exsits only for certain .exe filenames, the list of which is hardcoded into the driver.
+(This was likely done in order for NVIDIA to be able to control the list of
 applications that can make use of this feature.) And so, a bizarre and annoying requirement for using this
 library is that your .exe has to have one of those names. I suggest "wow.exe". I wonder what WoW stands for? ;)
 
@@ -146,7 +147,9 @@ be -1.0. In your vertex shader, simply multiply your y coordinate by the y_facto
 			gl_Position.y = vertex.y * y_factor;
 		}
 
-2. If you're using the immediate rendering API, you can reverse the Y axis via the projection matrix.
+2. If you're using the immediate rendering API (you shouldn't!), then you can reverse the Y axis via the
+projection matrix. Note that this will *also* reverse the direction of polygons for culling, which
+you can easily fix: `glCullFace(flip ? GL_FRONT : GL_BACK)`.
 
 3. If you really can't be bothered with modifying your drawing routines to support "flipping," as a last
 resort you can render your whole scene to an an FBO (Frame Buffer Object) and then "flip it" when rendering
