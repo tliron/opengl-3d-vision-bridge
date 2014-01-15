@@ -72,9 +72,9 @@ for this feature. Note that an annoyance of this interop is that OpenGL and Dire
 coordinate systems. This means that you will have to draw "upside down" in OpenGL in order for the rendered image
 to appear correctly. 
 
-Magic 3D Vision surfaces: You can turn on 3D Vision by [inserting a magic code](http://developer.download.nvidia.com/presentations/2009/GDC/GDC09-3DVision-The_In_and_Out.pdf) (page 37)
+Stereo Direct3D surfaces: You can turn on 3D Vision by [inserting a "stereo tag"](http://developer.download.nvidia.com/presentations/2009/GDC/GDC09-3DVision-The_In_and_Out.pdf) (page 37)
 into a Direct3D surface. This will work for any *fullscreen* application. However, support for 3D Vision in *windows*
-exsits only for certain .exe filenames, the list of which is hardcoded into the driver.
+exists only for certain .exe filenames, the list of which is hardcoded into the driver.
 (This was likely done in order for NVIDIA to be able to control the list of
 applications that can make use of this feature.) And so, a bizarre and annoying requirement for using this
 library is that your .exe has to have one of those names. I suggest "wow.exe". I wonder what WoW stands for? ;)
