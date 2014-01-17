@@ -40,6 +40,12 @@ available only for the NVIDIA Quadro range of pro video cards). If you want your
 OpenGL quad buffers and this library, you will have to code specifically for both cases. As you'll see, though,
 it shouldn't be hard: this library has only a handful of easy-to-use APIs.
 
+*Not* 3D Vision support for Linux:
+
+3D Vision is not supported on Linux with consumer NVIDIA video cards, period, and this library can't change that
+fact. However, if you are writing a game that runs on both Linux and Windows, this library will let you support
+3D Vision on the Windows version, without having to port all your code to Direct3D.
+
 License and "cost"
 ------------------
 
