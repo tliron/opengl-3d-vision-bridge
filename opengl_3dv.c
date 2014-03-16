@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#if defined(_WIN32)
+#if defined(_WIN32) || defined(_WIN64)
 
 extern "C" {
 #include "opengl_3dv.h"
@@ -84,7 +84,7 @@ void GLD3DBuffers_create(GLD3DBuffers *gl_d3d_buffers, void *window_handle, bool
 	}
 	BOOL fullscreen = (windowInfo.dwExStyle & WS_EX_TOPMOST) != 0;
 	if (fullscreen) {
-		printf(" We are in fullscreen mode: %u\n", (int) hWnd);
+		printf(" We are in fullscreen mode: %lu\n", hWnd);
 
 		// Doesn't work well :/
 		fullscreen = FALSE;

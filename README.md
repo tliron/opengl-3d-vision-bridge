@@ -2,10 +2,13 @@ OpenGL / 3D Vision Bridge
 =========================
 
 This tiny yet sophisticated library allows you to write graphical applications using OpenGL that can make
-use of the consumer version of [NVIDIA 3D Vision](http://www.nvidia.com/object/3d-vision-main.html) technology, which normally requires the Microsoft-only
+use of the *consumer* version of [NVIDIA 3D Vision](http://www.nvidia.com/object/3d-vision-main.html) technology, which normally requires the Microsoft-only
 Direct3D API.
 
-It relies on a native NVIDIA bridging feature, and thus performance is equal to that of using Direct3D
+(The [*pro* version](http://www.nvidia.com/object/quadro_stereo_technology.html) of NVIDIA 3D Vision, available only for
+NVIDIA Quadro GPUs, already supports 3D Vision in OpenGL via the standard "quad buffers" API.)
+
+This library relies on a native NVIDIA bridging feature, and thus performance is equal to that of using Direct3D
 directly.
 
 Why would you want this?
@@ -13,11 +16,11 @@ Why would you want this?
 
 You can use it to easily create cross-platform applications that can use 3D Vision when running on Windows.
 
-OpenGL is a great choice for cross-platform applications, as it's supported on Linux, Unix, Mac OS X, Windows
-and many mobile and console platforms. However, without this library, you would need to write your graphics
-code in Direct3D in order to make use of 3D Vision. Writing the same application in both OpenGL and Direct3D
+OpenGL is a great choice for cross-platform applications, because it's supported on Linux, Unix, Mac OS X, Windows
+and many mobile and console platforms. However, 3D Vision is (without this library) only available when
+using the Direct3D API. Writing the same application in both OpenGL and Direct3D
 is a prohibitively enormous task for most developers, and so they're left with the difficult choice between
-3D Vision + Microsoft-only vs. OpenGL + cross-platform but no 3D Vision. With this library you can have your
+3D Vision and Microsoft-only vs. OpenGL and cross-platform but no 3D Vision. With this library you can have your
 cake and eat it!
 
 What this library does *not* do
@@ -31,6 +34,7 @@ that Direct3D games enjoy relies on heuristics baked into NVIDIA's driver. (Inde
 are imperfect and many games do not run well with 3D Vision if they were not designed and tested for using it.)
 These heuristics are not supported in OpenGL. Indeed, the usual 3D Vision configuration in the NVIDIA
 Control Panel will not have any affect on this library, neither will the depth/convergence hot keys work.
+That said, someone could use this library in creating a wrapper.
 
 *Not* OpenGL quad buffers:
 
@@ -42,7 +46,7 @@ it shouldn't be hard: this library has only a handful of easy-to-use APIs.
 
 *Not* 3D Vision support for Linux:
 
-3D Vision is not supported on Linux with consumer NVIDIA video cards, period, and this library can't change that
+3D Vision is not supported by NVIDIA's Linux driver for consumer NVIDIA video cards, period, and this library can't change that
 fact. However, if you are writing a game that runs on both Linux and Windows, this library will let you support
 3D Vision on the Windows version, without having to port all your code to Direct3D.
 
@@ -59,7 +63,7 @@ is that you credit me somewhere in your final product, at the very least with so
 You may also provide a link to this site, and of course provide more details about my contribution to your
 product. 
 
-If you are feeling especially grateful, I am graciously accepting donations: ;)
+If you are feeling especially grateful, I am graciously accepting donations: :)
 
 [![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=NQXC28JYKUKH2)
 
@@ -90,29 +94,29 @@ You can read full details about my long journey to get this working in [my post 
 Building the library and demo
 -----------------------------
 
-To build the library, you will need:
+Requirement:
 
-* C compiler: Tested using gcc, specifically the MinGW cross-compiling version (not tested with Visual C, but
+* C compiler: Tested using gcc, specifically MinGW-win32 (not tested with Visual C, but
 should work).
 * [NVAPI](https://developer.nvidia.com/nvapi): Tested with version R331.
 * [Microsoft DirectX SDK](http://www.microsoft.com/en-us/download/details.aspx?id=6812): Tested with the June
 2010 version. Note that you will need to unpack the enormous SDK in Windows. You definitely don't need the whole
 SDK: you only need the Direct3D headers and .lib files.
 * OpenGL bindings: I'm including cross-platform bindings I've created using the excellent [glLoadGen tool](https://bitbucket.org/alfonse/glloadgen/wiki/Home).
-However, bindings are highly customizable and specific to your usage. You can build your own using glLoadGen
+However, bindings are highly customizable and specific to your usage. You can build your own custom bindings using glLoadGen
 or modify the code to use whatever binding tool you prefer (e.g., [GLEW](http://glew.sourceforge.net/)).
 
 To build the demo, you will also need:
 
 * [SDL 2](http://www.libsdl.org/)
 
-Note: The DirectX SDK headers won't compile anymore on recent versions of gcc's C compiler, but work fine when
-using its C++ compiler. Despite using the C++ compiler, our code is written in C and the resulting library will
-have a standard C ABI.
+Note: The DirectX SDK headers won't compile on recent versions of gcc's C compiler (they do compile on old
+ones!), but work fine when using a recent version of gcc's C++ compiler. Despite using the C++ compiler, the
+code is written in C and the resulting library has a standard C ABI.
 
 An example build script is included, named "build.sh".
 
-Obviously, you will have to run "wow.exe" on Windows with an NVIDIA GPU that supports 3D Vision. You also need to
+Obviously, you will have to run "wow.exe" on Windows with an NVIDIA GPU that supports 3D Vision. You also have to
 make sure that SDL2.dll is in the same directory as wow.exe.
 
 The demo is intentionally simple: it will show a simple red rectangle on a white background. Press "N" to toggle
